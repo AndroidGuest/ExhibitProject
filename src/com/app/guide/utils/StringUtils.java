@@ -1,11 +1,16 @@
 package com.app.guide.utils;
 
-import android.annotation.SuppressLint;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Pattern;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+
+import android.annotation.SuppressLint;
+import android.util.LruCache;
 
 /**
  * 字符串操作工具包
@@ -205,4 +210,5 @@ import java.util.regex.Pattern;
 		String str = formatter.format(curDate);
 		return str;
 	}
+
 }
