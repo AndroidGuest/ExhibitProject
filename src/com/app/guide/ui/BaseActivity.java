@@ -1,14 +1,14 @@
 package com.app.guide.ui;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 
+import com.actionbarsherlock.app.ActionBar;
 import com.app.guide.AppManager;
 import com.app.guide.R;
+import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
-public class BaseActivity extends FragmentActivity {
+public class BaseActivity extends SlidingFragmentActivity {
 
 	@SuppressLint("InlinedApi")
 	@Override
@@ -17,16 +17,23 @@ public class BaseActivity extends FragmentActivity {
 		// 添加Activity到堆栈
 		AppManager.getAppManager().addActivity(this);
 		if (!isFullScreen()) {
+			initActionbar();
 		} else {
 			setTheme(android.R.style.Theme_Holo_Light_NoActionBar);
 		}
-		ActionBar actionBar = getActionBar();
-		if (actionBar != null) {
-			actionBar.setTitle(getTitleStr());
-			actionBar.setBackgroundDrawable(getResources().getDrawable(
-					R.drawable.actionbar_bg));
-		}
-		
+		initSlidingMenu();
+	}
+
+	protected void initActionbar() {
+		ActionBar actionBar = getSupportActionBar();
+		actionBar.setTitle(getTitleStr());
+		actionBar.setBackgroundDrawable(getResources().getDrawable(
+				R.drawable.actionbar_bg));
+	}
+	
+	protected void initSlidingMenu() {
+		setBehindContentView(R.layout.sliding_menu_left);
+		getSlidingMenu().setSlidingEnabled(false);
 	}
 
 	@Override
